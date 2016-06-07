@@ -34,7 +34,7 @@ object TableFunctions
   def tableToString(tab: Table): String = {
     val header = "A\tB\tresult"
     val rowStrings = tab.map(x => x match {
-      case Row(a, b, r) => s"$a\t$b\t$r"
+      case Row(a, b, r) => s"$a\t$b\t$r\n"
     })
     header + "\n" + rowStrings
   }
@@ -45,7 +45,7 @@ object p46
   def main(args: Array[String]): Unit = {
     //see http://stackoverflow.com/questions/2886446/how-to-get-methods-list-in-scala
     val tables = BooleanFunctions.getFunctions.map(TableFunctions.table2(_))
-    val tableStrings = tables.map(TableFunctions.tableToString(_))
-    tableStrings.map(println(_))
+    val tableStrings = tables.map(TableFunctions.tableToString(_) + "\n")
+    tableStrings.foreach(println(_))
   }
 }
